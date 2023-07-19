@@ -6,7 +6,7 @@
 /*   By: vhappenh <vhappenh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 13:22:59 by vhappenh          #+#    #+#             */
-/*   Updated: 2023/07/19 13:03:21 by vhappenh         ###   ########.fr       */
+/*   Updated: 2023/07/19 13:05:26 by vhappenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ bool	ft_setup_p_stats(t_meta *meta, t_philo **p_stats, int *i)
 {
 	while (++(*i) < (int)meta->n)
 	{
-		if (*i == 3)
-			return (true);
 		(*p_stats)[*i].philo = 0;
 		(*p_stats)[*i].index = *i;
 		if (pthread_mutex_init(&(p_stats[*i]->mutex), NULL))
