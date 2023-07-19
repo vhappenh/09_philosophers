@@ -6,7 +6,7 @@
 /*   By: vhappenh <vhappenh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:05:11 by vhappenh          #+#    #+#             */
-/*   Updated: 2023/07/18 16:13:48 by vhappenh         ###   ########.fr       */
+/*   Updated: 2023/07/19 10:55:21 by vhappenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,10 @@ bool	ft_thread_create(int n, t_meta *meta, t_philo **p_stats, int *i)
 		return (true);
 	meta->start_time = ft_get_time();
 	*i = -1;
-	while (++*i < n)
+	while (++(*i) < n)
 	{
-		if (pthread_create(&(p_stats[*i]->philo), NULL, &ft_start, p_stats[*i]))
+		if (pthread_create(&((*p_stats)[*i].philo), NULL, &ft_start,
+			&((*p_stats)[*i])))
 		{
 			pthread_mutex_lock(&meta->dead_protect);
 			meta->dead = true;

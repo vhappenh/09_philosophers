@@ -6,7 +6,7 @@
 /*   By: vhappenh <vhappenh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 13:22:59 by vhappenh          #+#    #+#             */
-/*   Updated: 2023/07/18 16:14:09 by vhappenh         ###   ########.fr       */
+/*   Updated: 2023/07/19 10:51:34 by vhappenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ static void	ft_get_neighbor(t_philo **p_stats, unsigned int i)
 {
 	if (i != 0)
 	{
-		(*p_stats)[i].mutex_n = &(*p_stats)[i - 1].mutex;
-		(*p_stats)[i].fork_n = &(*p_stats)[i - 1].fork;
+		(*p_stats)[i].mutex_n = &((*p_stats)[i - 1].mutex);
+		(*p_stats)[i].fork_n = &((*p_stats)[i - 1].fork);
 	}
 	if (i == (*p_stats)[i].meta->max_index && (*p_stats)[i].meta->n != 1)
 	{
-		(*p_stats)[0].mutex_n = &(*p_stats)[i].mutex;
-		(*p_stats)[0].fork_n = &(*p_stats)[i].fork;
+		(*p_stats)[0].mutex_n = &((*p_stats)[i].mutex);
+		(*p_stats)[0].fork_n = &((*p_stats)[i].fork);
 	}
 }
 
@@ -60,12 +60,12 @@ bool	ft_setup_p_stats(t_meta *meta, t_philo **p_stats, int i)
 	while (++i < (int)meta->n)
 	{
 		(*p_stats)[i].index = i;
-		if (pthread_mutex_init(&((*p_stats)[i].mutex), NULL))
+		if (pthread_mutex_init(&(p_stats[i]->mutex), NULL))
 			return (true);
 		(*p_stats)[i].fork = true;
 		(*p_stats)[i].hands = 0;
 		(*p_stats)[i].meta = meta;
-		(*p_stats)[i].nom = (*p_stats)[i].meta->nom;
+		(*p_stats)[i].nom = meta->nom;
 		ft_get_neighbor(p_stats, i);
 	}
 	return (false);
