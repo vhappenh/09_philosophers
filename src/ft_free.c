@@ -6,7 +6,7 @@
 /*   By: vhappenh <vhappenh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 10:37:34 by vhappenh          #+#    #+#             */
-/*   Updated: 2023/07/18 16:14:32 by vhappenh         ###   ########.fr       */
+/*   Updated: 2023/07/19 13:01:42 by vhappenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,13 @@ static bool	ft_join_threads(t_philo *p_stats, int n_threads)
 		i = -1;
 		while (++i < n_threads)
 		{
-			if (pthread_join(p_stats[i].philo, NULL))
+			if (p_stats[i].philo)
 			{
-				write(2, "Failed to join thread.\n", 24);
-				return (true);
+				if (pthread_join(p_stats[i].philo, NULL))
+				{
+					write(2, "Failed to join thread.\n", 24);
+					return (true);
+				}
 			}
 		}
 	}
@@ -33,12 +36,14 @@ static bool	ft_join_threads(t_philo *p_stats, int n_threads)
 
 bool	ft_free(t_meta *meta, t_philo *p_stats, int i)
 {
+	int	j;
+	
 	if (ft_join_threads(p_stats, i))
 		return (true);
-	i = -1;
+	j = -1;
 	if (p_stats)
-		while (++i < (int)meta->n)
-			pthread_mutex_destroy(&p_stats[i].mutex);
+		while (++j < i)
+			pthread_mutex_destroy(&(p_stats[j].mutex));
 	free (p_stats);
 	if (meta)
 	{

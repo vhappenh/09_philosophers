@@ -6,7 +6,7 @@
 /*   By: vhappenh <vhappenh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 15:35:25 by vhappenh          #+#    #+#             */
-/*   Updated: 2023/07/18 15:56:35 by vhappenh         ###   ########.fr       */
+/*   Updated: 2023/07/19 13:03:44 by vhappenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <limits.h>
 # include <pthread.h>
 # include <sys/time.h>
+# include <string.h>
 
 typedef struct s_meta
 {
@@ -63,7 +64,7 @@ bool			ft_philo_prep(char **input, t_meta *meta, t_philo **p_stats);
 bool			ft_thread_create(int n, t_meta *meta, t_philo **p_stats,
 					int *i);
 bool			ft_thread_join(int n, t_philo **philos);
-bool			ft_setup_p_stats(t_meta *meta, t_philo **p_stats, int i);
+bool			ft_setup_p_stats(t_meta *meta, t_philo **p_stats, int *i);
 void			*ft_start(void *philo_struct);
 
 /* tasks */

@@ -6,7 +6,7 @@
 /*   By: vhappenh <vhappenh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 13:22:59 by vhappenh          #+#    #+#             */
-/*   Updated: 2023/07/19 10:51:34 by vhappenh         ###   ########.fr       */
+/*   Updated: 2023/07/19 13:03:21 by vhappenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,21 @@ static void	ft_get_neighbor(t_philo **p_stats, unsigned int i)
 	}
 }
 
-bool	ft_setup_p_stats(t_meta *meta, t_philo **p_stats, int i)
+bool	ft_setup_p_stats(t_meta *meta, t_philo **p_stats, int *i)
 {
-	while (++i < (int)meta->n)
+	while (++(*i) < (int)meta->n)
 	{
-		(*p_stats)[i].index = i;
-		if (pthread_mutex_init(&(p_stats[i]->mutex), NULL))
+		if (*i == 3)
 			return (true);
-		(*p_stats)[i].fork = true;
-		(*p_stats)[i].hands = 0;
-		(*p_stats)[i].meta = meta;
-		(*p_stats)[i].nom = meta->nom;
-		ft_get_neighbor(p_stats, i);
+		(*p_stats)[*i].philo = 0;
+		(*p_stats)[*i].index = *i;
+		if (pthread_mutex_init(&(p_stats[*i]->mutex), NULL))
+			return (true);
+		(*p_stats)[*i].fork = true;
+		(*p_stats)[*i].hands = 0;
+		(*p_stats)[*i].meta = meta;
+		(*p_stats)[*i].nom = meta->nom;
+		ft_get_neighbor(p_stats, *i);
 	}
 	return (false);
 }
@@ -79,6 +82,7 @@ bool	ft_philo_prep(char **input, t_meta *meta, t_philo **p_stats)
 	if (ft_setup_meta_stats(input, n, meta))
 		return (true);
 	*p_stats = malloc(sizeof(t_philo) * n);
+	memset(*p_stats, 0, sizeof(t_philo) * n);
 	if (*p_stats == NULL)
 		return (true);
 	return (false);

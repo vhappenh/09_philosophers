@@ -6,7 +6,7 @@
 /*   By: vhappenh <vhappenh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:05:11 by vhappenh          #+#    #+#             */
-/*   Updated: 2023/07/19 10:55:21 by vhappenh         ###   ########.fr       */
+/*   Updated: 2023/07/19 12:47:56 by vhappenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	*ft_start(void *philo_struct)
 
 bool	ft_thread_create(int n, t_meta *meta, t_philo **p_stats, int *i)
 {
-	if (ft_setup_p_stats(meta, p_stats, -1))
+	if (ft_setup_p_stats(meta, p_stats, i))
 		return (true);
 	meta->start_time = ft_get_time();
 	*i = -1;
