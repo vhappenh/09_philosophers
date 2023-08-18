@@ -6,7 +6,7 @@
 /*   By: vhappenh <vhappenh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 13:22:59 by vhappenh          #+#    #+#             */
-/*   Updated: 2023/08/18 17:06:04 by vhappenh         ###   ########.fr       */
+/*   Updated: 2023/08/18 17:19:09 by vhappenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ bool	ft_philo_prep(char **input, t_meta *meta, t_philo **p_stats)
 	if (ft_setup_meta_stats(input, n, meta))
 		return (true);
 	*p_stats = malloc(sizeof(t_philo) * n);
-	memset(*p_stats, 0, sizeof(t_philo) * n);
 	if (*p_stats == NULL)
 		return (true);
+	memset(*p_stats, 0, sizeof(t_philo) * n);
 	return (false);
 }
