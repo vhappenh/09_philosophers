@@ -6,7 +6,7 @@
 /*   By: vhappenh <vhappenh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 13:22:59 by vhappenh          #+#    #+#             */
-/*   Updated: 2023/07/19 13:05:26 by vhappenh         ###   ########.fr       */
+/*   Updated: 2023/08/18 17:06:04 by vhappenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ bool	ft_setup_p_stats(t_meta *meta, t_philo **p_stats, int *i)
 	{
 		(*p_stats)[*i].philo = 0;
 		(*p_stats)[*i].index = *i;
-		if (pthread_mutex_init(&(p_stats[*i]->mutex), NULL))
+		if (pthread_mutex_init(&((*p_stats)[*i].mutex), NULL))
 			return (true);
 		(*p_stats)[*i].fork = true;
 		(*p_stats)[*i].hands = 0;
